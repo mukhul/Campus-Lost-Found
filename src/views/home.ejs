@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<div class="hero">
+  <h1>Campus Lost &amp; Found</h1>
+  <p>Lost something on campus? Found something that isn't yours? Start here — reports are matched automatically and the admin desk helps reunite items with owners.</p>
+</div>
+
+<div class="choices">
+  <a class="choice" href="/lost">
+    <span class="c-icon">🔎</span>
+    <span class="c-title">I LOST SOMETHING</span>
+    <small>Report an item you misplaced</small>
+  </a>
+  <a class="choice" href="/found">
+    <span class="c-icon">📦</span>
+    <span class="c-title">I FOUND SOMETHING</span>
+    <small>Report an item you picked up</small>
+  </a>
+  <a class="choice" href="<%= typeof isAdmin === 'undefined' || !isAdmin ? '/admin/login' : '/admin' %>">
+    <span class="c-icon">🗂️</span>
+    <span class="c-title">ADMIN LOGIN</span>
+    <small>Lost &amp; Found desk / staff only</small>
+  </a>
+</div>
+
+<div class="btn-row" style="justify-content:center; margin-top:18px">
+  <a class="muted" href="/how-it-works" style="font-size:14px">Curious how the matching works? See How It Works →</a>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <b>How it works</b>
+  <ol>
+    <li>Students report lost or found items using the simple forms above.</li>
+    <li>Items left in the physical <b>Lost &amp; Found Box</b> are entered by the admin.</li>
+    <li>The system compares reports in the database and generates <b>possible matches</b> with a score out of 100.</li>
+    <li>The admin contacts both parties and marks confirmed returns as <b>resolved</b>.</li>
+  </ol>
+</div>
+
+<%- include('partials/footer') %>
