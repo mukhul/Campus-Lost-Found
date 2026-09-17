@@ -68,15 +68,49 @@ router.get('/', requireAdmin, async (req, res, next) => {
 // ---------- lost reports -------------------------------------------------
 router.get('/lost-reports', requireAdmin, async (req, res, next) => {
   try {
+    const search = (req.query.q || '').trim();
     const rows = await q(
       `SELECT lr.lost_id, i.item_name, i.category, loc.location_name,
               lr.lost_date, lr.status
        FROM lost_reports lr
        JOIN items i ON i.item_id = lr.item_id
        JOIN locations loc ON loc.location_id = lr.location_id
-       ORDER BY lr.lost_id DESC`
+       ${search ? `WHERE i.item_name LIKE ? OR i.category LIKE ?
+              OR loc.location_name LIKE ?` : ''}
+       ORDER BY lr.lost_id DESC`,
+      search ? [`%${search}%`, `%${search}%`, `%${search}%`] : []
     );
-    res.render('lost_reports', { title: 'Lost Reports', reports: rows });
+    res.render('lost_reports', {
+      title: 'Lost Reports', reports: rows, search,
+      count: rows.length,
+    });
+  } catch (e) { next(e); }
+});
+
+// CSV export (same filter as the list view)
+router.get('/lost-reports/export.csv', requireAdmin, async (req, res, next) => {
+  try {
+    const search = (req.query.q || '').trim();
+    const rows = await q(
+      `SELECT lr.lost_id, i.item_name, i.category, loc.location_name,
+              lr.lost_date, lr.status
+       FROM lost_reports lr
+       JOIN items i ON i.item_id = lr.item_id
+       JOIN locations loc ON loc.location_id = lr.location_id
+       ${search ? `WHERE i.item_name LIKE ? OR i.category LIKE ?
+              OR loc.location_name LIKE ?` : ''}
+       ORDER BY lr.lost_id DESC`,
+      search ? [`%${search}%`, `%${search}%`, `%${search}%`] : []
+    );
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="lost_reports.csv"');
+    const esc = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    res.write('id,item,category,location,date_lost,status\n');
+    rows.forEach(r => res.write(
+      [r.lost_id, r.item_name, r.category, r.location_name, r.lost_date, r.status]
+        .map(esc).join(',') + '\n'
+    ));
+    res.end();
   } catch (e) { next(e); }
 });
 
@@ -105,20 +139,52 @@ router.get('/lost-reports/:id', requireAdmin, async (req, res, next) => {
 // ---------- found reports ------------------------------------------------
 router.get('/found-reports', requireAdmin, async (req, res, next) => {
   try {
+    const search = (req.query.q || '').trim();
     const rows = await q(
       `SELECT fr.found_id, i.item_name, i.category, loc.location_name,
               fr.found_date, fr.source, fr.status
        FROM found_reports fr
        JOIN items i ON i.item_id = fr.item_id
        JOIN locations loc ON loc.location_id = fr.location_id
-       ORDER BY fr.found_id DESC`
+       ${search ? `WHERE i.item_name LIKE ? OR i.category LIKE ?
+              OR loc.location_name LIKE ?` : ''}
+       ORDER BY fr.found_id DESC`,
+      search ? [`%${search}%`, `%${search}%`, `%${search}%`] : []
     );
     res.render('found_reports', {
-      title: 'Found Reports', reports: rows,
+      title: 'Found Reports', reports: rows, search,
+      count: rows.length,
       notice: req.query.added
         ? 'Found item added — matches were generated for open lost reports.'
         : null,
     });
+  } catch (e) { next(e); }
+});
+
+// CSV export (same filter as the list view)
+router.get('/found-reports/export.csv', requireAdmin, async (req, res, next) => {
+  try {
+    const search = (req.query.q || '').trim();
+    const rows = await q(
+      `SELECT fr.found_id, i.item_name, i.category, loc.location_name,
+              fr.found_date, fr.source, fr.status
+       FROM found_reports fr
+       JOIN items i ON i.item_id = fr.item_id
+       JOIN locations loc ON loc.location_id = fr.location_id
+       ${search ? `WHERE i.item_name LIKE ? OR i.category LIKE ?
+              OR loc.location_name LIKE ?` : ''}
+       ORDER BY fr.found_id DESC`,
+      search ? [`%${search}%`, `%${search}%`, `%${search}%`] : []
+    );
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="found_reports.csv"');
+    const esc = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    res.write('id,item,category,location,date_found,source,status\n');
+    rows.forEach(r => res.write(
+      [r.found_id, r.item_name, r.category, r.location_name, r.found_date, r.source, r.status]
+        .map(esc).join(',') + '\n'
+    ));
+    res.end();
   } catch (e) { next(e); }
 });
 

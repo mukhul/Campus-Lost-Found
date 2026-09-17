@@ -12,6 +12,18 @@
 
 <% if (notice) { %><div class="notice ok"><%= notice %></div><% } %>
 
+<div class="toolbar">
+  <form method="get" action="/admin/found-reports">
+    <input type="text" name="q" value="<%= search %>" placeholder="Search item, category, location…">
+    <button class="btn secondary small">Search</button>
+    <% if (search) { %><a class="btn secondary small" href="/admin/found-reports">Clear</a><% } %>
+  </form>
+  <span class="spacer"></span>
+  <a class="btn secondary small" href="/admin/found-reports/export.csv<%= search ? `?q=${encodeURIComponent(search)}` : '' %>">Export CSV</a>
+</div>
+
+<p class="sub muted"><%= count %> report<%= count === 1 ? '' : 's' %><%= search ? ` matching “${search}”` : '' %>.</p>
+
 <% if (reports.length) { %>
   <div class="tablewrap">
   <table>

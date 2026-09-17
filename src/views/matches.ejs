@@ -21,11 +21,11 @@
     <% matches.forEach(m => { %>
       <tr class="rowlink" data-href="/admin/matches/<%= m.match_id %>">
         <td class="num"><span class="score-pill <%= Math.round(m.match_score) >= 80 ? 'score-hi' : Math.round(m.match_score) >= 60 ? 'score-mid' : 'score-lo' %>"><%= Math.round(m.match_score) %>%</span></td>
-        <td><b><%= m.lost_item_name %></b><br><span class="muted small">#<%= m.lost_id %></span></td>
-        <td><b><%= m.found_item_name %></b><br><span class="muted small">#<%= m.found_id %></span></td>
+        <td><b><%= m.lost_item %></b><br><span class="muted small">#<%= m.lost_id %></span></td>
+        <td><b><%= m.found_item %></b><br><span class="muted small">#<%= m.found_id %></span></td>
         <td class="nowrap"><%= m.lost_date %></td>
         <td class="nowrap"><%= m.found_date %></td>
-        <td><span class="badge <%= String(m.status).toLowerCase() %>"><%= m.status %></span></td>
+        <td><span class="badge <%= String(m.match_status).toLowerCase() %>"><%= m.match_status %></span></td>
       </tr>
     <% }) %>
   </table>
