@@ -6,78 +6,51 @@
    inside the family, so nothing ever clashes.
    ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
+
 :root {
   color-scheme: light;
-
-  --bg: #f5f7f2;                        /* apple grey with a sage breath */
-  --bg-grad: linear-gradient(180deg, #f8faf5 0%, #f2f5ee 100%);
-  --card: #ffffff;
-  --card-grad: linear-gradient(180deg, #ffffff 0%, #fcfdfa 100%);
-
-  --ink: #1d241d;                       /* spruce ink */
-  --muted: #6e7a6c;
-  --line: rgba(29, 36, 29, .10);        /* hairline */
-  --line-strong: rgba(29, 36, 29, .16);
-
-  --accent: #4f6f52;                    /* deep sage   */
-  --accent-2: #7a9a7c;                  /* light sage  */
-  --accent-dark: #3b563f;
-  --accent-soft: #ecf1e9;
-  --accent-ink: #3d5a41;
-
-  --grad-accent: linear-gradient(135deg, #587a5b 0%, #3b563f 100%);
-  --grad-soft:   linear-gradient(135deg, #f0f4ec 0%, #e6ecdf 100%);
-  --grad-hero:   linear-gradient(120deg, #3b563f 0%, #6f9372 60%, #8fae8f 100%);
-
-  --ok: #43704a;          --ok-soft: #e9f1e4;
-  --warn: #92623a;        --warn-soft: #f5efe2;
-  --danger: #9c4a3f;      --danger-soft: #f8e9e5;
-
-  --topbar-bg: rgba(255, 255, 255, .72);
-  --shadow: 0 1px 2px rgba(29, 36, 29, .04), 0 8px 24px -12px rgba(29, 36, 29, .12);
-  --shadow-lift: 0 2px 6px rgba(29, 36, 29, .06), 0 16px 36px -14px rgba(29, 36, 29, .18);
-  --radius: 14px;
-  --radius-s: 9px;
+  --bg: #f3efe6;  --bg-grad: none;
+  --card: #fbf9f4; --card-grad: none;
+  --ink: #1f1d1a; --muted: #6b655b;
+  --line: #d9d2c3; --line-strong: #1f1d1a;
+  --accent: #d2502a; --accent-2: #e8805f; --accent-dark: #a83c1c;
+  --accent-soft: #f6e3d9; --accent-ink: #a83c1c;
+  --grad-accent: linear-gradient(#d2502a,#d2502a);
+  --grad-soft: linear-gradient(#efe9dc,#efe9dc);
+  --grad-hero: linear-gradient(var(--ink),var(--ink));
+  --ok: #2f6b45; --ok-soft: #e1ecdf;
+  --warn: #9a6a12; --warn-soft: #f4e9cc;
+  --danger: #b23a2a; --danger-soft: #f6dfd9;
+  --topbar-bg: #f3efe6;
+  --shadow: 3px 3px 0 var(--ink);
+  --shadow-lift: 5px 5px 0 var(--ink);
+  --radius: 4px; --radius-s: 3px;
+  --spot: rgba(210, 80, 42, .14);
 }
-
 html[data-theme="dark"] {
   color-scheme: dark;
-
-  --bg: #101310;                        /* spruce black */
-  --bg-grad: radial-gradient(1100px 700px at 75% -10%, #1a201a 0%, #0f120f 62%) fixed;
-  --card: #171c16;
-  --card-grad: linear-gradient(180deg, #1b211a 0%, #151a14 100%);
-
-  --ink: #e8ede5;
-  --muted: #949f92;
-  --line: rgba(232, 237, 229, .12);
-  --line-strong: rgba(232, 237, 229, .2);
-
-  --accent: #85ab87;
-  --accent-2: #a8c8a9;
-  --accent-dark: #aed0af;
-  --accent-soft: #242d23;
-  --accent-ink: #b6d4b7;
-
-  --grad-accent: linear-gradient(135deg, #6f9c71 0%, #47704c 100%);
-  --grad-soft:   linear-gradient(135deg, #20281f 0%, #1a211a 100%);
-  --grad-hero:   linear-gradient(120deg, #c8e0c9 0%, #90b992 55%, #5d8762 100%);
-
-  --ok: #8fc291;          --ok-soft: #1f2b1c;
-  --warn: #d2b06a;        --warn-soft: #2b2819;
-  --danger: #d98d80;      --danger-soft: #301d19;
-
-  --topbar-bg: rgba(16, 19, 16, .68);
-  --shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 10px 28px -16px rgba(0, 0, 0, .55);
-  --shadow-lift: 0 2px 8px rgba(0, 0, 0, .4), 0 18px 40px -16px rgba(0, 0, 0, .65);
+  --bg: #171614; --card: #201e1b;
+  --ink: #ece6da; --muted: #9c9486;
+  --line: #3a3630; --line-strong: #ece6da;
+  --accent: #ef7148; --accent-2: #f39674; --accent-dark: #ff9a77;
+  --accent-soft: #3a241b; --accent-ink: #f39674;
+  --grad-accent: linear-gradient(#ef7148,#ef7148);
+  --grad-soft: linear-gradient(#2a2723,#2a2723);
+  --ok: #8cc49a; --ok-soft: #1f2c22;
+  --warn: #e0b45a; --warn-soft: #2e2716;
+  --danger: #ec8a77; --danger-soft: #34201b;
+  --topbar-bg: #171614;
+  --shadow: 3px 3px 0 #000;
+  --shadow-lift: 5px 5px 0 #000;
+  --spot: rgba(239, 113, 72, .16);
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
-               Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
   background: var(--bg);
   background-image: var(--bg-grad);
   background-attachment: fixed;
@@ -482,3 +455,57 @@ ol.steps li { margin-bottom: 10px; font-size: 14.5px; }
 .right { text-align: right; }
 .nowrap { white-space: nowrap; }
 .actions form { display: inline; }
+
+/* ============ hand-tuned pass: noticeboard feel ============ */
+h1, h2, .hero h1, .stat .num, .success-box h1 {
+  font-family: "Instrument Serif", Georgia, serif; font-weight: 400;
+  background: none; -webkit-text-fill-color: currentColor; color: var(--ink);
+  letter-spacing: -0.01em;
+}
+h1 { font-size: 40px; line-height: 1.05; }
+h2 { font-size: 28px; }
+h1 em, .hero h1 em { color: var(--accent); }
+.topbar { border-bottom: 1.5px solid var(--ink); backdrop-filter: none; -webkit-backdrop-filter: none; padding: 14px 28px; }
+.topbar .brand { font-family: "Instrument Serif", serif; font-size: 24px; font-weight: 400; }
+.topbar .brand span { background: none; -webkit-text-fill-color: currentColor; color: var(--accent); font-style: italic; }
+.topbar nav a, .topbar .navout { border-radius: 0; }
+.topbar nav a.active { background: none; color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
+
+.hero { text-align: left; padding: 40px 0 8px; max-width: 920px; }
+.hero h1 { font-size: clamp(48px, 8vw, 86px); margin: 0 0 18px; width: auto; }
+.hero p { margin: 0; font-size: 17px; max-width: 540px; }
+.eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); margin-bottom: 14px; }
+
+.card, .tablewrap, a.stat, .choice { border: 1.5px solid var(--ink); }
+html[data-theme="dark"] .card, html[data-theme="dark"] .tablewrap, html[data-theme="dark"] a.stat, html[data-theme="dark"] .choice { border-color: var(--line); }
+.choice { text-align: left; padding: 22px 22px 24px; overflow: hidden; }
+.choice:hover, a.stat:hover { transform: translate(-2px,-2px); border-color: var(--ink); }
+.choice .c-num { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--accent); }
+.choice .c-title { font-family: "Instrument Serif", serif; font-weight: 400; font-size: 30px; margin-top: 34px; line-height: 1.05; }
+.choice:hover .c-title { background: none; -webkit-text-fill-color: currentColor; color: var(--accent); }
+.choice small { font-size: 14px; }
+
+.btn, .chip, .badge, .score-pill, .pill, .toolbar input[type="text"], .theme-toggle { border-radius: 2px; }
+.btn { background-image: none; background: var(--ink); color: var(--bg); box-shadow: 2px 2px 0 var(--accent); }
+.btn:hover { filter: none; background: var(--accent); color: #fff; }
+.btn.ok { background-image: none; background: var(--ok); }
+.badge, .score-pill, .pill, th, h4 { font-family: "IBM Plex Mono", monospace; }
+th { background: transparent; border-bottom: 1.5px solid var(--ink); color: var(--ink); }
+.chip.active { background-image: none; background: var(--ink); color: var(--bg); }
+.scorebar { border-radius: 0; } .scorebar > div { border-radius: 0; }
+.stat .num { font-size: 52px; line-height: 1; }
+
+/* SpotlightCard (React Bits, vanilla port) */
+.spotlight { position: relative; isolation: isolate; }
+.spotlight::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), var(--spot), transparent 70%);
+  opacity: 0; transition: opacity .3s;
+}
+.spotlight:hover::before { opacity: 1; }
+
+/* BlurText (React Bits, vanilla port) */
+.blur-text .w { display: inline-block; opacity: 0; filter: blur(10px); transform: translateY(-18px);
+  animation: blurIn .7s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * 110ms); }
+@keyframes blurIn { 60% { opacity: .6; filter: blur(4px); transform: translateY(3px); } to { opacity: 1; filter: blur(0); transform: none; } }
+@media (prefers-reduced-motion: reduce) { .blur-text .w { animation: none; opacity: 1; filter: none; transform: none; } }

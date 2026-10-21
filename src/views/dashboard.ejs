@@ -8,22 +8,22 @@
 <% if (notice) { %><div class="notice ok"><%= notice %></div><% } %>
 
 <div class="stats">
-  <a class="stat" href="/admin/lost-reports">
+  <a class="stat spotlight" href="/admin/lost-reports">
     <div class="num"><%= counts.lost %></div>
     <div class="lbl">Open Lost Reports</div>
     <div class="go">View all →</div>
   </a>
-  <a class="stat" href="/admin/found-reports">
+  <a class="stat spotlight" href="/admin/found-reports">
     <div class="num"><%= counts.found %></div>
     <div class="lbl">Unclaimed Found Reports</div>
     <div class="go">View all →</div>
   </a>
-  <a class="stat" href="/admin/matches">
+  <a class="stat spotlight" href="/admin/matches">
     <div class="num"><%= counts.pending %></div>
     <div class="lbl">Possible Matches</div>
     <div class="go">Review →</div>
   </a>
-  <a class="stat" href="/admin/resolved">
+  <a class="stat spotlight" href="/admin/resolved">
     <div class="num"><%= counts.resolved %></div>
     <div class="lbl">Resolved</div>
     <div class="go">History →</div>

@@ -41,7 +41,7 @@
     : publicNav;
 %>
 <header class="topbar">
-  <a class="brand" href="/">🎒 Campus <span>Lost &amp; Found</span></a>
+  <a class="brand" href="/">Campus <span>Lost &amp; Found</span></a>
   <nav>
     <% items.forEach(it => { %>
       <a href="<%= it.href %>" class="<%= it.match(current) ? 'active' : '' %>"><%= it.label %></a>

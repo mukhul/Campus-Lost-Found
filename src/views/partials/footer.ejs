@@ -26,6 +26,34 @@ document.addEventListener('DOMContentLoaded', function () {
     try { localStorage.setItem('theme', next); } catch (e) { /* private mode */ }
   });
 });
+
+// BlurText — split headline into words, stagger a blur-in
+document.querySelectorAll('.blur-text').forEach(function (el) {
+  var i = 0;
+  (function walk(node) {
+    Array.from(node.childNodes).forEach(function (n) {
+      if (n.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          var w = document.createElement('span'); w.className = 'w'; w.style.setProperty('--i', i++);
+          w.textContent = part; frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) walk(n);
+    });
+  })(el);
+});
+
+// SpotlightCard — radial glow follows the cursor
+document.addEventListener('pointermove', function (e) {
+  var c = e.target.closest && e.target.closest('.spotlight');
+  if (!c) return;
+  var r = c.getBoundingClientRect();
+  c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+  c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+});
 </script>
 </body>
 </html>
